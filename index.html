@@ -43,18 +43,14 @@
                 .then(data => {
                     console.log("Antwort von der WebApp:", data); // Debug
 
-                    if (data.Erfolg === true) {
-                        document.getElementById("message").innerText = "Login erfolgreich!";
-                        document.getElementById("message").style.color = "green";
-
-                        // Weiterleitung zum Dashboard
-                        setTimeout(() => {
-                            window.location.href = "dashboard.html";
-                        }, 1000);
-                    } else {
-                        document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
-                        document.getElementById("message").style.color = "red";
-                    }
+                    if (data.Erfolg) {
+    document.getElementById("message").innerText = "Login erfolgreich!";
+    document.getElementById("message").style.color = "green";
+    window.location.href = "dashboard.html";
+} else {
+    document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
+    document.getElementById("message").style.color = "red";
+}
                 })
                 .catch(error => {
                     document.getElementById("message").innerText = "Fehler bei der Verbindung zur Datenbank!";
