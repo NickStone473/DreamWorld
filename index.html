@@ -2,12 +2,12 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>DreamWorld</title>
+    <title>Meine Homepage mit Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Willkommen bei DreamWorld</h1>
+        <h1>Willkommen auf meiner Homepage</h1>
     </header>
 
     <main>
@@ -21,7 +21,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 DreamWorld</p>
+        <p>&copy; 2025 Meine Homepage</p>
     </footer>
 
     <script>
@@ -29,14 +29,14 @@
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
-            fetch("https://script.google.com/macros/s/AKfycbwooe6C9GqeWZHezImVnps1XqCJPaDsUH_UmtGiQ0OtLXZKl3Sx3qjBsc0CtCCvXb1RUg/exec=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password))
+            fetch("https://script.google.com/macros/s/AKfycbwooe6C9GqeWZHezImVnps1XqCJPaDsUH_UmtGiQ0OtLXZKl3Sx3qjBsc0CtCCvXb1RUg/exec" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password))
             .then(response => response.json())
             .then(data => {
                 if(data.success){
                     document.getElementById("message").innerText = "Login erfolgreich!";
                     document.getElementById("message").style.color = "green";
-                    // Weiterleitung nach Login (optional)
-                    // window.location.href = "dashboard.html";
+                    // Weiterleitung zum Dashboard
+                    window.location.href = "dashboard.html";
                 } else {
                     document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
                     document.getElementById("message").style.color = "red";
