@@ -2,45 +2,56 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>DreamWorld Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <header>
-        <h1>Dashboard</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Startseite</a></li>
-                <li><a href="#">Profil</a></li>
-                <li><a href="#">Einstellungen</a></li>
-            </ul>
-        </nav>
+        <h1>DreamWorld Dashboard</h1>
+        <p id="welcome"></p>
     </header>
 
     <main>
-        <section class="dashboard">
-            <h2>Willkommen auf deinem Dashboard!</h2>
-            <p>Hier siehst du deine Projekte und Infos.</p>
-
-            <div class="features">
-                <div class="feature-card">
-                    <h3>Projekt 1</h3>
-                    <p>Beschreibung Projekt 1</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Projekt 2</h3>
-                    <p>Beschreibung Projekt 2</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Projekt 3</h3>
-                    <p>Beschreibung Projekt 3</p>
-                </div>
-            </div>
+        <section class="dashboard-grid">
+            <div class="card" id="autorenbereich">Autorenbereich</div>
+            <div class="card" id="lektorat">Lektorat</div>
+            <div class="card" id="verkauf">Verkauf</div>
+            <div class="card" id="personalmanager">Personalmanager</div>
+            <div class="card" id="druckbereich">Druckbereich</div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Meine Homepage</p>
+        <p>DreamWorld &copy; 2025</p>
     </footer>
+
+    <script>
+        // Benutzername aus URL (z.B. login.html?user=chef)
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get("user") || "Gast";
+
+        document.getElementById("welcome").innerText = "Willkommen, " + username + "!";
+
+        // Klick-Events für jede Karte (später Seiten verlinken)
+        document.getElementById("autorenbereich").addEventListener("click", () => {
+            alert("Autorenbereich öffnen");
+        });
+
+        document.getElementById("lektorat").addEventListener("click", () => {
+            alert("Lektorat öffnen");
+        });
+
+        document.getElementById("verkauf").addEventListener("click", () => {
+            alert("Verkauf öffnen");
+        });
+
+        document.getElementById("personalmanager").addEventListener("click", () => {
+            alert("Personalmanager öffnen");
+        });
+
+        document.getElementById("druckbereich").addEventListener("click", () => {
+            alert("Druckbereich öffnen");
+        });
+    </script>
 </body>
 </html>
