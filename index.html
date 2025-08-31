@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Meine Homepage mit Login</title>
+    <title>DreamWorld</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,34 +15,41 @@
             <h2>Login</h2>
             <input type="text" id="username" placeholder="Benutzername">
             <input type="password" id="password" placeholder="Passwort">
-            <button onclick="login()">Einloggen</button>
+            <button id="loginBtn">Einloggen</button>
             <p id="message"></p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Meine Homepage</p>
+        <p>&copy; 2025 DreamWorld</p>
     </footer>
 
     <script>
-        function login() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+        const webAppURL = "https://script.google.com/macros/s/AKfycbwooe6C9GqeWZHezImVnps1XqCJPaDsUH_UmtGiQ0OtLXZKl3Sx3qjBsc0CtCCvXb1RUg/exec";
 
-            fetch("https://script.google.com/macros/s/AKfycbwooe6C9GqeWZHezImVnps1XqCJPaDsUH_UmtGiQ0OtLXZKl3Sx3qjBsc0CtCCvXb1RUg/exec" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password))
-            .then(response => response.json())
-            .then(data => {
-                if(data.success){
-                    document.getElementById("message").innerText = "Login erfolgreich!";
-                    document.getElementById("message").style.color = "green";
-                    // Weiterleitung zum Dashboard
-                    window.location.href = "dashboard.html";
-                } else {
-                    document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
+        document.getElementById("loginBtn").addEventListener("click", () => {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            fetch(`${webAppURL}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success){
+                        document.getElementById("message").innerText = "Login erfolgreich!";
+                        document.getElementById("message").style.color = "green";
+                        // Weiterleitung zum Dashboard
+                        window.location.href = "dashboard.html";
+                    } else {
+                        document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
+                        document.getElementById("message").style.color = "red";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("message").innerText = "Fehler bei der Verbindung zur Datenbank!";
                     document.getElementById("message").style.color = "red";
-                }
-            });
-        }
+                    console.error(error);
+                });
+        });
     </script>
 </body>
 </html>
