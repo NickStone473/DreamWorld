@@ -4,6 +4,55 @@
     <meta charset="UTF-8">
     <title>DreamWorld Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background: #4a90e2;
+            color: white;
+            padding: 1rem;
+        }
+
+        main {
+            margin: 2rem auto;
+            width: 90%;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background: #e0e7ff;
+        }
+
+        footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #4a90e2;
+            color: white;
+        }
+
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
     <header>
@@ -26,32 +75,50 @@
     </footer>
 
     <script>
-        // Benutzername aus URL (z.B. login.html?user=chef)
+        // Benutzername aus URL
         const params = new URLSearchParams(window.location.search);
         const username = params.get("user") || "Gast";
 
+        // Begrüßung
         document.getElementById("welcome").innerText = "Willkommen, " + username + "!";
 
-        // Klick-Events für jede Karte (später Seiten verlinken)
-        document.getElementById("autorenbereich").addEventListener("click", () => {
-            alert("Autorenbereich öffnen");
-        });
+        // Rollen-Zuordnung (später aus Google Sheet holen)
+        const userRoles = {
+            "chef": "CEO",
+            "max": "Autor",
+            "lisa": "Lektor",
+            "verkäufer": "Verkauf",
+            "drucker": "Druck",
+            "personal": "Personalmanager"
+        };
 
-        document.getElementById("lektorat").addEventListener("click", () => {
-            alert("Lektorat öffnen");
-        });
+        const role = userRoles[username] || "Gast";
 
-        document.getElementById("verkauf").addEventListener("click", () => {
-            alert("Verkauf öffnen");
-        });
+        // Alle Karten ausblenden, dann nur die passenden sichtbar machen
+        const cards = ["autorenbereich","lektorat","verkauf","personalmanager","druckbereich"];
+        cards.forEach(id => document.getElementById(id).classList.add("hidden"));
 
-        document.getElementById("personalmanager").addEventListener("click", () => {
-            alert("Personalmanager öffnen");
-        });
+        if(role === "CEO") {
+            // CEO sieht alles
+            cards.forEach(id => document.getElementById(id).classList.remove("hidden"));
+        } else if(role === "Autor") {
+            document.getElementById("autorenbereich").classList.remove("hidden");
+        } else if(role === "Lektor") {
+            document.getElementById("lektorat").classList.remove("hidden");
+        } else if(role === "Verkauf") {
+            document.getElementById("verkauf").classList.remove("hidden");
+        } else if(role === "Personalmanager") {
+            document.getElementById("personalmanager").classList.remove("hidden");
+        } else if(role === "Druck") {
+            document.getElementById("druckbereich").classList.remove("hidden");
+        }
 
-        document.getElementById("druckbereich").addEventListener("click", () => {
-            alert("Druckbereich öffnen");
-        });
+        // Klick-Events für jede Karte
+        document.getElementById("autorenbereich").addEventListener("click", () => alert("Autorenbereich öffnen"));
+        document.getElementById("lektorat").addEventListener("click", () => alert("Lektorat öffnen"));
+        document.getElementById("verkauf").addEventListener("click", () => alert("Verkauf öffnen"));
+        document.getElementById("personalmanager").addEventListener("click", () => alert("Personalmanager öffnen"));
+        document.getElementById("druckbereich").addEventListener("click", () => alert("Druckbereich öffnen"));
     </script>
 </body>
 </html>

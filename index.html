@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <h1>Willkommen in der DreamWorld-Zentralle</h1>
+        <h1>Willkommen in der DreamWorld-Zentrale</h1>
     </header>
 
     <main>
@@ -38,8 +38,12 @@
                     if (data.Erfolg) {
                         document.getElementById("message").innerText = "Login erfolgreich!";
                         document.getElementById("message").style.color = "green";
-                        // Weiterleitung zum Dashboard
-                        window.location.href = "dashboard.html";
+
+                        // Weiterleitung zum Dashboard mit Username als URL-Parameter
+                        setTimeout(() => {
+                            window.location.href = "dashboard.html?user=" + encodeURIComponent(username);
+                        }, 500);
+
                     } else {
                         document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
                         document.getElementById("message").style.color = "red";
