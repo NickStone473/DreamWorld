@@ -25,20 +25,32 @@
     </footer>
 
     <script>
-        const webAppURL = "https://docs.google.com/spreadsheets/d/1SaCGdakx26zE5sBB8xeQsU8gwopUXLcBzLKkNBaWdsc/edit?usp=sharing";
+        // WICHTIG: richtige WebApp-URL vom Apps Script!
+        const webAppURL = "https://script.google.com/macros/s/AKfycbwUKLbhdSOjkWAqiVjo0re5_8S2-xZbRGZq-MoESt1C_rkrpni280rzpzINhkYNr2DXsw/exec";
 
         document.getElementById("loginBtn").addEventListener("click", () => {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!username || !password) {
+                document.getElementById("message").innerText = "Bitte alle Felder ausfüllen!";
+                document.getElementById("message").style.color = "red";
+                return;
+            }
 
             fetch(`${webAppURL}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`)
                 .then(response => response.json())
                 .then(data => {
-                    if(data.success){
+                    console.log("Antwort von der WebApp:", data); // Debug
+
+                    if (data.Erfolg === true) {
                         document.getElementById("message").innerText = "Login erfolgreich!";
                         document.getElementById("message").style.color = "green";
+
                         // Weiterleitung zum Dashboard
-                        window.location.href = "dashboard.html";
+                        setTimeout(() => {
+                            window.location.href = "dashboard.html";
+                        }, 1000);
                     } else {
                         document.getElementById("message").innerText = "Benutzername oder Passwort falsch!";
                         document.getElementById("message").style.color = "red";
@@ -47,7 +59,7 @@
                 .catch(error => {
                     document.getElementById("message").innerText = "Fehler bei der Verbindung zur Datenbank!";
                     document.getElementById("message").style.color = "red";
-                    console.error(error);
+                    console.error("Fetch-Fehler:", error);
                 });
         });
     </script>
