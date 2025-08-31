@@ -25,8 +25,7 @@
     </footer>
 
     <script>
-        // DEINE Apps Script WebApp-URL einsetzen (nicht die Tabellen-URL!)
-        const webAppURL = "https://script.google.com/macros/s/AKfycbwUhH0a09H_LzbR8kX8fTwfgHBRKBOmNiIgNxExwT7DpP29U_FV1BK_tWLvinZLiheWtA/exec";
+        const webAppURL = "https://script.google.com/macros/s/AKfycbwaLNfqTzGpLJ1dgmgB1ZVoPxlT2l53OeUKCZEcUur8/dev";
 
         document.getElementById("loginBtn").addEventListener("click", () => {
             const username = document.getElementById("username").value;
@@ -39,9 +38,9 @@
                         document.getElementById("message").innerText = "Login erfolgreich!";
                         document.getElementById("message").style.color = "green";
 
-                        // Weiterleitung zum Dashboard mit Username als URL-Parameter
+                        // Weiterleitung zum Dashboard mit Username und Rolle
                         setTimeout(() => {
-                            window.location.href = "dashboard.html?user=" + encodeURIComponent(username);
+                            window.location.href = "dashboard.html?user=" + encodeURIComponent(username) + "&role=" + encodeURIComponent(data.Rolle);
                         }, 500);
 
                     } else {

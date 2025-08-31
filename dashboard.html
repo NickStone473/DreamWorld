@@ -5,52 +5,13 @@
     <title>DreamWorld Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        header {
-            background: #4a90e2;
-            color: white;
-            padding: 1rem;
-        }
-
-        main {
-            margin: 2rem auto;
-            width: 90%;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            background: #e0e7ff;
-        }
-
-        footer {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #4a90e2;
-            color: white;
-        }
-
+        body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; text-align: center; }
+        header { background: #4a90e2; color: white; padding: 1rem; }
+        main { margin: 2rem auto; width: 90%; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.2s, background 0.2s; }
+        .card:hover { transform: scale(1.05); background: #e0e7ff; }
+        footer { margin-top: 2rem; padding: 1rem; background: #4a90e2; color: white; }
         .hidden { display: none; }
     </style>
 </head>
@@ -75,31 +36,17 @@
     </footer>
 
     <script>
-        // Benutzername aus URL
         const params = new URLSearchParams(window.location.search);
         const username = params.get("user") || "Gast";
+        const role = params.get("role") || "Gast";
 
-        // Begrüßung
         document.getElementById("welcome").innerText = "Willkommen, " + username + "!";
 
-        // Rollen-Zuordnung (später aus Google Sheet holen)
-        const userRoles = {
-            "chef": "CEO",
-            "max": "Autor",
-            "lisa": "Lektor",
-            "verkäufer": "Verkauf",
-            "drucker": "Druck",
-            "personal": "Personalmanager"
-        };
-
-        const role = userRoles[username] || "Gast";
-
-        // Alle Karten ausblenden, dann nur die passenden sichtbar machen
         const cards = ["autorenbereich","lektorat","verkauf","personalmanager","druckbereich"];
         cards.forEach(id => document.getElementById(id).classList.add("hidden"));
 
+        // Dynamische Rollensteuerung
         if(role === "CEO") {
-            // CEO sieht alles
             cards.forEach(id => document.getElementById(id).classList.remove("hidden"));
         } else if(role === "Autor") {
             document.getElementById("autorenbereich").classList.remove("hidden");
@@ -113,7 +60,7 @@
             document.getElementById("druckbereich").classList.remove("hidden");
         }
 
-        // Klick-Events für jede Karte
+        // Klick-Events
         document.getElementById("autorenbereich").addEventListener("click", () => alert("Autorenbereich öffnen"));
         document.getElementById("lektorat").addEventListener("click", () => alert("Lektorat öffnen"));
         document.getElementById("verkauf").addEventListener("click", () => alert("Verkauf öffnen"));
